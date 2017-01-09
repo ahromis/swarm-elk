@@ -1,0 +1,69 @@
+version: "3"
+
+services:
+
+  elasticsearch:
+    command: elasticsearch -Enetwork.host=0.0.0.0 -Ediscovery.zen.ping.unicast.hosts=elasticsearch
+    environment:
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+    image: elasticsearch:5
+    ulimits:
+      memlock: -1
+      nofile:
+        hard: 65536
+        soft: 65536
+      nproc: 65538
+    volumes:
+      - esdata:/usr/share/elasticsearch/data:rw
+    networks:
+      - logging
+    deploy:
+      mode: replicated
+      replicas: 1
+    healthcheck:
+      test: curl -s http://localhost:9200/_cluster/health | egrep 'yellow|green'
+      interval: 30s
+      retries: 3
+  kibana:
+    image: kibana:latest
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    networks:
+      - logging
+      - ucp-hrm
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - com.docker.ucp.mesh.http.5601=external_route=http://kibana.example.com,internal_port=5601
+    healthcheck:
+      test: wget -qO- http://localhost:5601 > /dev/null
+      interval: 30s
+      retries: 3
+  logstash:
+    command: sh -c "logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output { stdout { codec => rubydebug } elasticsearch { hosts => [ \"elasticsearch\" ] } }'"
+    image: logstash:alpine
+    ports:
+      - "10514:10514/tcp"
+      - "10514:10514/udp"
+      - "12201:12201/udp"
+    networks:
+      - logging
+    volumes:
+      - ./logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf
+    deploy:
+      mode: replicated
+      replicas: 2
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  logging:
+    driver: overlay
+  ucp-hrm:
+    external:
+      name: ucp-hrm
