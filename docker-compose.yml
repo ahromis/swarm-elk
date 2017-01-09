@@ -51,8 +51,6 @@ services:
       - "12201:12201/udp"
     networks:
       - logging
-    volumes:
-      - ./logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf
     deploy:
       mode: replicated
       replicas: 2
