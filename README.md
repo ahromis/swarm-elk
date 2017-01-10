@@ -20,7 +20,7 @@ That will bring up the ELK stack.
 
 > **Note:** You may want to remove the stdout output using the `rubydebug` codec after confirming everything works as you expect. By leaving the stdout output enabled it would be too much output for most environments.
 
-If using UCP then you can access Kibana via the HRM label, which should be set for the DNS name you wish to use to access it. Otherwise access Kibana via the service's published port, which is 5601 in this file.
+If using UCP then you can access Kibana via the HRM label, which should be set to the URL you want to use for access to Kibana. Otherwise access Kibana via the service's published port, which is 5601 in this compose file.
 
 ### Testing
 
