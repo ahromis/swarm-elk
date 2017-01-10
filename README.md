@@ -35,4 +35,4 @@ You can set logs at the engine level as well by specifying `--log-opt gelf-addre
 ### TODO
 
 - Cluster Elasticsearch
-- Add a buffer like redis, rabbitmq, or kafka
+- Add an input buffer like redis, rabbitmq, or kafka
