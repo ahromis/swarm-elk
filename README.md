@@ -26,9 +26,11 @@ If using UCP then you can access Kibana via the HRM label, which should be set t
 
 Run the following container:
 
-`docker run -it --log-driver=gelf --log-opt gelf-address=udp://<logstash-host>:12201 alpine ping 8.8.8.8`
+`docker run --rm -it --log-driver=gelf --log-opt gelf-address=udp://<logstash-host>:12201 alpine ping 8.8.8.8`
 
 Login to Kibana and you should see traffic coming into Elasticsearch.
+
+If you do a docker logs on the logstash container and you should see some messages coming through as well.
 
 You can set logs at the engine level as well by specifying `--log-opt gelf-address=udp://host:port` in your daemon arguments. Or you can use syslog as well as TLS if you wish to add in your own certs.
 
