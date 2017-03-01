@@ -4,7 +4,7 @@ This repository uses the new Docker Compose v3 format to create an ELK stack usi
 
 ## Prerequisites:
 
-1. Docker Engine 1.10+
+1. Docker Engine 1.13+
 2. Docker Compose 1.10+
 3. Set the following on nodes that will be running Elasticsearch:
     1. `sysctl -w vm.max_map_count=262144`
