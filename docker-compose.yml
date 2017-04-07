@@ -16,7 +16,7 @@ services:
     volumes:
       - esdata:/usr/share/elasticsearch/data:rw
     networks:
-      - logging
+      - elk
     deploy:
       mode: replicated
       replicas: 1
@@ -31,13 +31,10 @@ services:
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
     networks:
-      - logging
-      - ucp-hrm
+      - elk
     deploy:
       mode: replicated
       replicas: 1
-      labels:
-        - com.docker.ucp.mesh.http.5601=external_route=http://kibana.example.com,internal_port=5601
     healthcheck:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
@@ -50,7 +47,7 @@ services:
       - "10514:10514/udp"
       - "12201:12201/udp"
     networks:
-      - logging
+      - elk
     deploy:
       mode: replicated
       replicas: 2
@@ -60,8 +57,5 @@ volumes:
     driver: local
 
 networks:
-  logging:
+  elk:
     driver: overlay
-  ucp-hrm:
-    external:
-      name: ucp-hrm

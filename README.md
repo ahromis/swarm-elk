@@ -14,7 +14,7 @@ This repository uses the new Docker Compose v3 format to create an ELK stack usi
 
 1. Clone this repository
 2. On a machine that is communicating with the swarm cluster:
-    1. `docker stack deploy -c $(pwd)/docker-compose.yml logging`
+    1. `docker stack deploy -c $(pwd)/docker-compose.yml elk`
 
 That will bring up the ELK stack.
 
