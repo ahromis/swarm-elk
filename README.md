@@ -22,6 +22,15 @@ That will bring up the ELK stack.
 
 If using UCP then you can access Kibana via the HRM label, which should be set to the URL you want to use for access to Kibana. Otherwise access Kibana via the service's published port, which is 5601 in this compose file.
 
+## HA Elasticsearch
+
+Elasticsearch can be run in an HA configuration after the initial stack comes up. The first node needs to register as healthy before scaling it out. After the initial Elasticsearch member is healthy, then it can be scaled.
+
+1. Find the Elasticsearch service ID:
+  1. `docker service ls`
+1. Scale out the service to include more replicas:
+  1. `docker service update --replicas=3 <replica_id>`
+
 ### Testing
 
 Run the following container:
@@ -36,5 +45,4 @@ You can set logs at the engine level as well by specifying `--log-opt gelf-addre
 
 ### TODO
 
-- Cluster Elasticsearch
 - Add an input buffer like redis, rabbitmq, or kafka
