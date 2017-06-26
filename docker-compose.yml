@@ -21,6 +21,11 @@ services:
       mode: replicated
       replicas: 1
       endpoint_mode: dnsrr
+      resources:
+        limits:
+          memory: 2024M
+        reservations:
+          memory: 2024M
     healthcheck:
       test: curl -s http://localhost:9200/_cluster/health?local=true | grep 'green'
       interval: 30s
