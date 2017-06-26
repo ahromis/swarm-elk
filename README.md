@@ -31,7 +31,7 @@ Elasticsearch can be run in an HA configuration after the initial stack comes up
 1. Scale out the service to include more replicas:
   1. `docker service update --replicas=3 <replica_id>`
 
-### Testing
+## Testing
 
 Run the following container:
 
