@@ -4,8 +4,8 @@ This repository uses the new Docker Compose v3 format to create an ELK stack usi
 
 ## Prerequisites:
 
-1. Docker Engine 1.13+
-2. Docker Compose 1.10+
+1. Docker Engine 17.06.0+
+2. Docker Compose 1.14+
 3. Set the following on nodes that will be running Elasticsearch:
     1. `sysctl -w vm.max_map_count=262144`
     2. `echo 'vm.max_map_count=262144' >> /etc/sysctl.conf` (to persist reboots)
@@ -18,7 +18,7 @@ This repository uses the new Docker Compose v3 format to create an ELK stack usi
 
 That will bring up the ELK stack.
 
-> **Note:** You may want to remove the stdout output using the `rubydebug` codec after confirming everything works as you expect. By leaving the stdout output enabled it would be too much output for most environments. Also you would want to increase the Elasticsearch heap size and memory reservations for most deployments.
+> **Note:** You may want to remove the stdout output using the `rubydebug` codec after confirming everything works as you expect. By leaving the stdout output enabled it would be too much output for most environments. Also you would want to increase the Elasticsearch heap size and memory/limits reservations for most deployments.
 
 If using UCP then you can access Kibana via the HRM label, which should be set to the URL you want to use for access to Kibana. Otherwise access Kibana via the service's published port, which is 5601 in this compose file.
 

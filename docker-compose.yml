@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.3"
 
 services:
 
@@ -21,6 +21,10 @@ services:
       mode: replicated
       replicas: 1
       endpoint_mode: dnsrr
+      placement:
+        constraints:
+          - node.hostname!=m00
+          - node.hostname!=dtr0
       resources:
         limits:
           memory: 2024M
@@ -41,6 +45,10 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      placement:
+        constraints:
+          - node.hostname!=m00
+          - node.hostname!=dtr0
     healthcheck:
       test: wget -qO- http://localhost:5601 > /dev/null
       interval: 30s
@@ -57,6 +65,10 @@ services:
     deploy:
       mode: replicated
       replicas: 2
+      placement:
+        constraints:
+          - node.hostname!=m00
+          - node.hostname!=dtr0
 
 networks:
   elk:
