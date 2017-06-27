@@ -27,9 +27,9 @@ If using UCP then you can access Kibana via the HRM label, which should be set t
 Elasticsearch can be run in an HA configuration after the initial stack comes up. The first node needs to register as healthy before scaling it out. After the initial Elasticsearch member is healthy, then it can be scaled.
 
 1. Find the Elasticsearch service ID:
-  1. `docker service ls`
-1. Scale out the service to include more replicas:
-  1. `docker service update --replicas=3 <replica_id>`
+    1. `docker service ls`
+2. Scale out the service to include more replicas:
+    1. `docker service update --replicas=3 <replica_id>`
 
 ## Testing
 
