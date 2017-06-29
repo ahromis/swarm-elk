@@ -47,7 +47,7 @@ services:
     deploy:
       mode: global
     volumes:
-        - logbook_docker-journal:/log/docker-journal.log
+      - logbook_docker-journal:/log/docker-journal.log
 
 volumes:
   logbook_docker-journal:
