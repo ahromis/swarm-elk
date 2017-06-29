@@ -43,6 +43,10 @@ If you do a `docker logs` on the logstash container and you should see some mess
 
 You can set logs at the engine level as well by specifying `--log-opt gelf-address=udp://host:port` in your daemon arguments. Or you can use syslog as well as TLS if you wish to add in your own certs.
 
+## Prebuilt Solution
+
+Please refer to the [README](https://github.com/ahromis/swarm-elk/logstash/blob/master/README.md) directory for a prebuilt way to log using this repo with logstash.
+
 ### TODO
 
 - Add an input buffer like redis, rabbitmq, or kafka

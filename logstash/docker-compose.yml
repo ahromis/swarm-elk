@@ -1,0 +1,58 @@
+version: "3.2"
+
+services:
+
+  elasticsearch:
+    command: elasticsearch -Enetwork.host=0.0.0.0 -Ediscovery.zen.ping.unicast.hosts=elasticsearch
+    environment:
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+    image: elasticsearch:5
+    ulimits:
+      memlock: -1
+      nofile:
+        hard: 65536
+        soft: 65536
+      nproc: 65538
+    volumes:
+      - /usr/share/elasticsearch/data
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+    healthcheck:
+      test: curl -s http://localhost:9200/_cluster/health?local=true | grep 'green'
+      interval: 30s
+      retries: 3
+  kibana:
+    image: kibana:latest
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+    healthcheck:
+      test: wget -qO- http://localhost:5601 > /dev/null
+      interval: 30s
+      retries: 3
+  logstash:
+    image: ahromis/logstash:5.4.2-alpine
+    networks:
+      - elk
+    deploy:
+      mode: global
+    volumes:
+        - logbook_docker-journal:/log/docker-journal.log
+
+volumes:
+  logbook_docker-journal:
+    external: true
+
+networks:
+  elk:
+    driver: overlay
