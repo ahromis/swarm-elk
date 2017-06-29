@@ -45,7 +45,7 @@ You can set logs at the engine level as well by specifying `--log-opt gelf-addre
 
 ## Prebuilt Solution
 
-Please refer to the [README](https://github.com/ahromis/swarm-elk/blob/master/logstash/README.md) directory for a prebuilt way to log using this repo with logstash.
+Please refer to the [logstash](https://github.com/ahromis/swarm-elk/tree/master/logstash) directory for a prebuilt way to log using this repo with logstash.
 
 ### TODO
 
