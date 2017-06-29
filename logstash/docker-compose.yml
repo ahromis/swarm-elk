@@ -7,11 +7,6 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms1g -Xmx1g
     image: elasticsearch:5
-    resources:
-      limits:
-        memory: 2024M
-      reservations:
-        memory: 2024M
     ulimits:
       memlock: -1
       nofile:
@@ -26,6 +21,11 @@ services:
       mode: replicated
       replicas: 1
       endpoint_mode: dnsrr
+      resources:
+        limits:
+          memory: 2024M
+        reservations:
+          memory: 2024M
     healthcheck:
       test: curl -s http://localhost:9200/_cluster/health?local=true | grep 'green'
       interval: 30s
