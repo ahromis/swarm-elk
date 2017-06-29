@@ -7,6 +7,11 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms1g -Xmx1g
     image: elasticsearch:5
+    resources:
+      limits:
+        memory: 2024M
+      reservations:
+        memory: 2024M
     ulimits:
       memlock: -1
       nofile:
@@ -56,3 +61,5 @@ volumes:
 networks:
   elk:
     driver: overlay
+    driver_opts:
+      encrypted: "true"
