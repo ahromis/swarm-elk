@@ -20,7 +20,7 @@ That will bring up the ELK stack.
 
 > **Note:** You may want to remove the stdout output using the `rubydebug` codec after confirming everything works as you expect. By leaving the stdout output enabled it would be too much output for most environments. Also you would want to increase the Elasticsearch heap size and memory/limits reservations for most deployments.
 
-Access kibana at http://<worker-node-ip>:5601
+Access kibana at `http://<worker-node-ip>:5601`
 
 ## HA Elasticsearch
 
