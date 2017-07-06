@@ -38,7 +38,7 @@ docker service create \
     tomcat:latest
 ```
 
-That will create output similar to this from logstash when using this repo:
+That will create output similar to this from logstash when using this repo. The `CONTAINER_NAME` will match the output of the `stdout` stream from the container, making it easy to filter based on your container's logs.
 
 ```
 {
