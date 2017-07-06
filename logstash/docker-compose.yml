@@ -53,6 +53,7 @@ services:
       mode: global
     volumes:
       - logbook_docker-journal:/log/docker-journal.log
+      - /var/lib/docker/volumes:/log/volumes
 
 volumes:
   logbook_docker-journal:
