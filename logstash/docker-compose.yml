@@ -53,9 +53,12 @@ services:
       mode: global
     volumes:
       - logbook_docker-journal:/log/docker-journal.log
+      - logstash-sincedb:/usr/share/logstash/data
       - /var/lib/docker/volumes:/log/volumes
 
 volumes:
+  logstash-sincedb:
+    driver: local
   logbook_docker-journal:
     external: true
 
