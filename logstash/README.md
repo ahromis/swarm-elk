@@ -28,7 +28,14 @@ Many times traditional applications will log to multiple locations. Java applica
 When launching a Tomcat application with the following parameters, Docker will create a volume that contains the container name.
 
 ```
-docker service create -d --name prod-tomcat  --label version=1.5 --label environment=prod --mount type=volume,src="{{.Task.Name}}",dst=/usr/local/tomcat/logs --replicas 3 tomcat:latest
+docker service create \
+    -d \
+    --name prod-tomcat \
+    --label version=1.5 \
+    --label environment=prod \
+    --mount type=volume,src="{{.Task.Name}}",dst=/usr/local/tomcat/logs \
+    --replicas 3 \
+    tomcat:latest
 ```
 
 That will create output similar to this from logstash when using this repo:
