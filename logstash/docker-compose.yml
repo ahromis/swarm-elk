@@ -47,12 +47,13 @@ services:
       retries: 3
   logstash:
     image: ahromis/logstash:5.4.2-alpine
+    hostname: logstash
     networks:
       - elk
     deploy:
       mode: global
     volumes:
-      - logbook_docker-journal:/log/docker-journal.log
+      - logbook_docker-journal:/log/docker
       - logstash-sincedb:/usr/share/logstash/data
       - /var/lib/docker/volumes:/log/volumes
 

@@ -46,6 +46,7 @@ services:
       interval: 30s
       retries: 3
   logstash:
+    hostname: logstash
     command: sh -c "logstash -e 'input { syslog  { type => syslog port => 10514   } gelf { } } output { stdout { codec => rubydebug } elasticsearch { hosts => [ \"elasticsearch\" ] } }'"
     image: logstash:alpine
     ports:
