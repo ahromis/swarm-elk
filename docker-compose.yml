@@ -57,6 +57,12 @@ services:
     deploy:
       mode: replicated
       replicas: 2
+    volumes:
+      - logstash-sincedb:/usr/share/logstash/data
+
+volumes:
+  logstash-sincedb:
+    driver: local
 
 networks:
   elk:
