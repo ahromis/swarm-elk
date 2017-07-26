@@ -5,7 +5,7 @@ services:
   elasticsearch:
     command: elasticsearch -Enetwork.host=0.0.0.0 -Ediscovery.zen.ping.unicast.hosts=elasticsearch
     environment:
-      ES_JAVA_OPTS: -Xms1g -Xmx1g
+      ES_JAVA_OPTS: -Xms2g -Xmx2g
     image: elasticsearch:5
     ulimits:
       memlock: -1
@@ -21,11 +21,6 @@ services:
       mode: replicated
       replicas: 1
       endpoint_mode: dnsrr
-      resources:
-        limits:
-          memory: 2024M
-        reservations:
-          memory: 2024M
     healthcheck:
       test: curl -s http://localhost:9200/_cluster/health?local=true | grep 'green'
       interval: 30s
