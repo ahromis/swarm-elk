@@ -1,4 +1,4 @@
-FROM logstash:5.4.2-alpine
+FROM logstash:5.5.1-alpine
 
 RUN mkdir -p /log/volumes && \
     mkdir -p /log/docker
